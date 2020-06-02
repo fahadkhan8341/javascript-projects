@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        .container{width:80%;margin:0 auto;}
+        .gallery{height: 50vh;width:80%;margin:0 auto;}
+        .gallery img{height: 50vh;width:80%;}
+        button{text-align: center;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gallery">
+            <img src="1.jpg" id="image" alt="">
+        </div>
+        <button id="prev">Prev</button><button id="next">Next</button>
+    </div>
+    <script>
+        let imgs = ['1.jpg','2.jpg','3.jpg','4.jpg']
+        let prev = document.getElementById('prev');
+        let next= document.getElementById('next');
+        var i=0;
+        let image= document.getElementById('image');
+
+        setInterval(() => {
+            
+            if (i>imgs.length-1){
+            i=0; 
+            }
+            image.src=imgs[i]
+            i++;
+        }, 5000);
+        
+
+        prev.addEventListener('click',function(){
+            if(i<0){
+                i=3
+            }
+            image.src=imgs[i]
+            i--;
+        })
+    </script>
+</body>
+</html>

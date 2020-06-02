@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Online</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="number" name="" id="hour" min="0" max="99" placeholder="00"ond)
+        }> :
+        <input type="number" name="" id="minute" min="0" max="60" placeholder="00"ond)
+        }> :
+        <input type="number" name="" id="second" min="0" max="60" placeholder="00"ond)
+        }>
+        <br><br><button id="start">Start</button>
+        <button id="reset">reset</button>
+    </div>
+    <script>
+
+        let start = document.getElementById('start');
+        let reset = document.getElementById('reset');
+
+        start.addEventListener('click', function () {
+            
+            let hour = document.getElementById('hour').value;
+            let minute = document.getElementById('minute').value;
+            let second = document.getElementById('second').value;
+            if (second==0){
+                alert('Please enter any values..')
+            } else if (hour>99 || minute > 60 || second > 60){
+                alert('Hours greater than 99 and minutes, seconds greater than 60 are not allowed..')
+
+            }
+             else {
+            clr = setInterval(() => {
+
+                if (hour == 0 && minute == 0 && second == 0) {
+                    clearInterval(clr)
+                    hour=null;
+                    minute=null;
+                    second=null;
+                    
+                }else if (minute==60){
+                    minute=59;
+                } else if (second != 0) {
+                    second--;
+                } 
+                 else if (minute != 0 && second == 0) {
+                    second = 59;
+                    minute--;
+                } else if (hour != 0 && minute == 0) {
+                    minute = 59;
+                    hour--;
+                }
+                
+                    document.getElementById('second').value = second;
+                    document.getElementById('minute').value = minute;
+                    document.getElementById('hour').value = hour;
+                    console.log(hour + ":" + minute + ":" + second);
+                
+            }, 1000);
+
+            }
+        })
+        reset.addEventListener('click', function () {
+            clearInterval(clr);
+            document.getElementById('hour').value = null;
+            document.getElementById('minute').value =null;
+            document.getElementById('second').value = null;
+        })    
+    </script>
+</body>
+
+</html>

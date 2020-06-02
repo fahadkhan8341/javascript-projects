@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color</title>
+    <style>
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background-color: aquamarine;
+            overflow: hidden;
+            transition: all 6s ease;
+        }
+        .container{display: flex;justify-content: center;align-items:center;height: 100vh;flex-direction: column;}
+        #output{color:white;font-size: 10rem;font-family: Arial, Helvetica, sans-serif;text-align: center;}
+        button{background-color: black;border-radius: 5px;
+        color:white;font-size: 2rem;}
+        #btn{padding:0rem 2rem;}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <div id="output">0</div><br>
+    <div>
+        <button id="btn">+</button>
+    <button id="reset">reset</button>
+    </div>
+    </div>
+    <script>
+        let colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+
+        let body = document.querySelector('body');
+        setInterval(() => {
+            // let randomColor = Math.floor(Math.random() * colors.length)
+            
+            body.style.backgroundColor = colors[randomColor]
+        }, 5000);
+        let btn= document.getElementById('btn');
+        let output= document.getElementById('output');
+        let reset= document.getElementById('reset');
+        let int=0;
+        
+        reset.addEventListener('click',function(){
+            if(confirm('All data will be lost forever. Are you sure?')){
+                int=0
+                output.innerHTML=0;
+            }
+        })
+        btn.addEventListener('click',function(){
+            int+=1;
+            output.innerHTML=int;
+        })
+
+    </script>
+</body>
+
+</html>

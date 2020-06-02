@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE CSS LIVE</title>
+    <style>
+        body{background-color: #333333;}
+        textarea{width:880px;height:220px;outline:none;border:none;}
+        .container{height: 40vh;}
+        .container,.container2{width:70%;margin:auto;border:3px solid #333333;margin:2rem auto;}
+        .container2{display: flex;align-items: center;justify-content: space-evenly;background-color: white;}
+        .color button{width:25px;height: 25px;}
+        #black{background-color: black;}
+        #red{background-color: red;}
+        #green{background-color: green;}
+        #blue{background-color: blue;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea  id="para" ></textarea>
+    </div>
+    <div class="container2">
+        <div class="font">
+            <h4>Font Family:</h4>
+        <select name="" id="ff" onchange="changeff()">
+        <option value="default">default</option>
+        <option value="arial">arial</option>
+        <option value="cambria">cambria</option>
+        <option value="monospace">monospace</option>
+        <option value="georgia">georgia</option>
+
+        </select>
+        </div>
+        <div class="size">
+            <h4>font Size: <span id="fontSize"></span> </h4>
+            <input type="range" name="" id="rangeSlider" min="9" max="52" value="12">
+        </div>
+
+        <div class="color">
+            <h4>font Color</h4>
+            <button id="black"></button>
+            <button id="red"></button>
+            <button id="green"></button>
+            <button id="blue"></button>
+        </div>
+    </div>
+    l
+    <script>
+        function changeff(){
+        let para= document.getElementById('para');
+        let font= document.getElementById('ff').value;
+
+        switch(font){
+            case 'default':
+            para.style.fontFamily="sans-serif"
+            break;
+
+            case 'arial':
+            para.style.fontFamily="Arial"
+            break;
+
+            case 'cambria':
+            para.style.fontFamily="Cambria"
+            break;
+
+            case 'monospace':
+            para.style.fontFamily="monospace"
+            break;
+
+            case 'georgia':
+            para.style.fontFamily="Georgia"
+            break;
+
+            
+        }
+        }
+        let fontSize=document.getElementById('fontSize');
+        let rangeSlider=document.getElementById('rangeSlider');
+        fontSize.innerHTML=rangeSlider.value;
+
+        rangeSlider.oninput = function(){
+            fontSize.innerHTML = this.value;
+            var num= this.value;
+            para.style.fontSize=num+"px";
+        }  
+        let black=document.getElementById('black');
+        let red=document.getElementById('red');
+        let green=document.getElementById('green');
+        let blue=document.getElementById('blue');
+        black.addEventListener('click',function(){
+            para.style.color="black"
+        })
+        red.addEventListener('click',function(){
+            para.style.color="red"
+        })    
+        green.addEventListener('click',function(){
+            para.style.color="green"
+        })
+        blue.addEventListener('click',function(){
+            para.style.color="blue"
+        })
+    </script>
+</body>
+</html>

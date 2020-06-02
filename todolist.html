@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List Online</title>
+    <style>
+        body{display: flex;height: 100vh;margin:0;padding:0;box-sizing: border-box;flex-direction: column;font-family: monospace;}
+        .container{width:70%;height: 16vh;display: flex;justify-content: center;align-items: center;}
+        .container,.todos{margin:0 auto;}
+        input{width:35%;height: 6vh;border: 2px solid black;font-size: 1.2rem;}
+        button{height: 7vh;width: 60px;background-color: transparent;border:2px solid black;font-size: 1.5rem;border-left: none;}
+        .list,.listItem{cursor: pointer;font-size: 1.6rem;font-family: monospace;}
+        .listDone{text-decoration: line-through;}
+        .list:hover{color:#333333;}
+        .todos{display: block;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" name="" id="input"><button id="add">></button><br><br>
+    </div>
+        <div class="todos">
+
+        </div>
+    <script>
+
+        let add=document.getElementById('add');
+        let input=document.getElementById('input');
+        let todos=document.querySelector('.todos');
+        add.addEventListener('click',function(){
+            let list=document.createElement('p');
+            list.innerText=input.value;
+            var listItem=list.innerText;
+            todos.appendChild(list);
+            list.classList.add('list')
+            input.value='';
+            list.addEventListener('click',function(){
+                if(list.classList.contains('listDone')){
+                    list.classList.remove('listDone')
+                }  else {
+                    list.classList.add('listDone')
+                }
+            })
+            list.addEventListener('dblclick',function(){
+                todos.removeChild(list)
+            })
+            localStorage.setItem('list',listItem);
+        })
+        todos.innerText=localStorage.getItem('list')
+
+    </script>
+</body>
+</html>
