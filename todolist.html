@@ -1,54 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List Online</title>
     <style>
-        body{display: flex;height: 100vh;margin:0;padding:0;box-sizing: border-box;flex-direction: column;font-family: monospace;}
-        .container{width:70%;height: 16vh;display: flex;justify-content: center;align-items: center;}
-        .container,.todos{margin:0 auto;}
-        input{width:35%;height: 6vh;border: 2px solid black;font-size: 1.2rem;}
-        button{height: 7vh;width: 60px;background-color: transparent;border:2px solid black;font-size: 1.5rem;border-left: none;}
-        .list,.listItem{cursor: pointer;font-size: 1.6rem;font-family: monospace;}
-        .listDone{text-decoration: line-through;}
-        .list:hover{color:#333333;}
-        .todos{display: block;}
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            flex-direction: column;
+            font-family: monospace;
+        }
+
+        .container {
+            width: 70%;
+            height: 16vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container,
+        .todos {
+            margin: 0 auto;
+        }
+
+        input {
+            width: 35%;
+            height: 6vh;
+            border: 2px solid black;
+            font-size: 1.2rem;
+        }
+
+        button {
+            height: 7vh;
+            width: 60px;
+            background-color: transparent;
+            border: 2px solid black;
+            font-size: 1.5rem;
+            border-left: none;
+        }
+
+        .list,
+        .listItem {
+            cursor: pointer;
+            font-size: 1.6rem;
+            font-family: monospace;
+        }
+
+        .listDone {
+            text-decoration: line-through;
+        }
+
+        .list:hover {
+            color: #333333;
+        }
+
+        .todos {
+            display: block;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            ;
+        }
+
+        button:hover,
+        button:active {
+            border: 3px solid black;
+            font-size: 1.5rem;
+            border-left: none;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <input type="text" name="" id="input"><button id="add">></button><br><br>
     </div>
-        <div class="todos">
+    <div class="todos">
 
-        </div>
+    </div>
+    <div class="info">
+        -Click your Todo to Mark it as completed.<br>
+        -Double Click your Todo to remove it from list.
+    </div>
     <script>
 
-        let add=document.getElementById('add');
-        let input=document.getElementById('input');
-        let todos=document.querySelector('.todos');
-        add.addEventListener('click',function(){
-            let list=document.createElement('p');
-            list.innerText=input.value;
-            var listItem=list.innerText;
+        let add = document.getElementById('add');
+        let input = document.getElementById('input');
+        let todos = document.querySelector('.todos');
+
+        document.addEventListener("DOMContentLoaded",show())
+
+        add.addEventListener('click', function () {
+            var list = document.createElement('p');
+            list.innerText = input.value;
+            var listItem = list.innerText;
             todos.appendChild(list);
             list.classList.add('list')
-            input.value='';
-            list.addEventListener('click',function(){
-                if(list.classList.contains('listDone')){
+            store(input.value);
+            input.value = '';
+            list.addEventListener('click', function () {
+                if (list.classList.contains('listDone')) {
                     list.classList.remove('listDone')
-                }  else {
+                } else {
                     list.classList.add('listDone')
                 }
             })
-            list.addEventListener('dblclick',function(){
+            list.addEventListener('dblclick', function () {
+                remove(list)
                 todos.removeChild(list)
             })
-            localStorage.setItem('list',listItem);
         })
-        todos.innerText=localStorage.getItem('list')
+        function store(list) {
+            let todo;
+            if (localStorage.getItem('lists') === null) {
+                todo = [];
+            }
+            else {
+                todo = JSON.parse(localStorage.getItem('lists'));
+            }
+            todo.push(list);
+            localStorage.setItem("lists", JSON.stringify(todo))
+        }
 
+        function show() {
+            let todo;
+            if (localStorage.getItem('lists') === null) {
+                todo = [];
+            }
+            else {
+                todo = JSON.parse(localStorage.getItem('lists'));
+            }
+            todo.forEach(function(element) {
+
+                var list = document.createElement('p');
+                list.innerText = element;
+                var listItem = list.innerText;
+                todos.appendChild(list);
+                list.classList.add('list')
+                store(input.value);
+                input.value = '';
+                list.addEventListener('click', function () {
+                    if (list.classList.contains('listDone')) {
+                        list.classList.remove('listDone')
+                    } else {
+                        list.classList.add('listDone')
+                    }
+                })
+                list.addEventListener('dblclick', function () {
+                    todos.removeChild(list)
+                })
+            })
+        }
+        function remove(element){
+            let todo;
+            if (localStorage.getItem('lists') === null) {
+                todo = [];
+            }
+            else {
+                todo = JSON.parse(localStorage.getItem('lists'));
+            }
+            let todoIndex= element.innerText;
+           todo.splice(todo.indexOf(todoIndex), 1);
+           localStorage.setItem("lists", JSON.stringify(todo))
+            
+        }
     </script>
 </body>
+
 </html>
