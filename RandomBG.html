@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <title>Hello, world!</title>
+    <style>
+        body{background-color: black;transition: all 1s ease-in-out;}
+        img{width:auto;height: 100vh;margin:auto;display: block;transition: all 1s ease-in-out;}
+        #reload{position: absolute;top:1rem;right:1rem;}
+        button{background-color: transparent;}
+        i{color:white;font-size: 2.2rem;}
+        #prev{position:absolute;top:50%;left:1rem;}
+        #next{position: absolute;top: 50%;right:1rem;}
+    </style>
+  </head>
+  <body>
+    <img src="https://source.unsplash.com/600x400/?islam/islamic/muslim" id="image">
+    <button id="reload" class="btn btn-lg"> <i class="fas fa-sync-alt"></i></button>
+    <button id="prev" class="btn btn-lg"> <i class="fas fa-angle-left"></i></button>
+    <button id="next" class="btn btn-lg"> <i class="fas fa-angle-right"></i></button>
+    <div id="container"></div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+       let refresh=document.getElementById('reload');
+       refresh.addEventListener('click',function(){
+           location.reload();
+       })
+       let prev=document.getElementById('prev');
+       prev.addEventListener('click',function(){
+           location.reload();
+       })
+       let next=document.getElementById('next');
+       next.addEventListener('click',function(){
+           location.reload();
+       })
+       let xhr=new XMLHttpRequest();
+       xhr.open('GET',"https://source.unsplash.com/600x400/?islam/islamic/muslim",true);
+       setInterval(() => {
+       xhr.open('GET',"https://source.unsplash.com/600x400/?islam/islamic/muslim",true);
+       console.log('Got url from server');
+       var imgurl=this.responseURL;
+       console.log(imgurl);
+       document.getElementById('container').innerHTML = this.responseText;
+
+       xhr.onload = function () {
+        
+
+      } 
+       }, 5000);
+       
+            
+       
+       setInterval(() => {
+        xhr.onload=function(){
+        if(this.status==200){
+          console.log('onload func triggerd');
+          document.getElementById('image').src=imgurl  
+        }        
+       }
+
+       }, 9000);
+       xhr.send()
+
+    </script>
+  </body>
+</html>
