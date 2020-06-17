@@ -43,34 +43,30 @@
        next.addEventListener('click',function(){
            location.reload();
        })
-       let xhr=new XMLHttpRequest();
-       xhr.open('GET',"https://source.unsplash.com/600x400/?islam/islamic/muslim",true);
-       setInterval(() => {
-       xhr.open('GET',"https://source.unsplash.com/600x400/?islam/islamic/muslim",true);
-       console.log('Got url from server');
-       var imgurl=this.responseURL;
-       console.log(imgurl);
-       document.getElementById('container').innerHTML = this.responseText;
-
-       xhr.onload = function () {
-        
-
-      } 
-       }, 5000);
-       
+       let imgs=[];
+       function getImg(){
+         setInterval(() => {
+           fetch('https://source.unsplash.com/600x400/?islam/mosque/galaxy/ocean/nature/').then(res=>res)
+           .then(data=>{
+             showImg(data.url)
+            // console.log(data.url);
+            imgs.push(data.url)
+            console.log(imgs);
             
-       
-       setInterval(() => {
-        xhr.onload=function(){
-        if(this.status==200){
-          console.log('onload func triggerd');
-          document.getElementById('image').src=imgurl  
-        }        
+           })
+          // showImg(data.url) 
+           
+         }, 9000);
+       }       
+       getImg()
+       function showImg(url){
+         setInterval(() => {
+           for(i=0;i<imgs.length;i++){
+             document.getElementById('images').src=imgs[i]
+           }
+         }, 15000);
        }
-
-       }, 9000);
-       xhr.send()
-
+       
     </script>
   </body>
 </html>

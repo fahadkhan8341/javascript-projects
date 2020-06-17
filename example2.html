@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+        }
+        .btn-container{display: flex;padding: 0;}
+        .btn-container button{flex:1}
+        
+    </style>
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <h1>Currency Converter</h1>
+        <input type="number" placeholder=" Enter amount in USD or INR" class="form-control mt-4 shadow mb-4" id="input">
+        <!-- <h3 class="text-center my-2">to</h3> -->
+        <input type="text" placeholder=" Result" class="form-control mt-2 shadow mb-4" disabled id="output">
+        <div class="container btn-container">
+            <button id="getUsd" class="btn btn-info mr-3" onclick="getUsd()">INR to USD</button>
+            <button id="getInr" class="btn btn-info ml-3" onclick="getInr()">USD to INR</button></div>
+            <hr class="mt-5">
+            <h3>% Percentage of the amount</h3>
+            
+            <input type="text" placeholder=" % Percentage in USD " class="form-control mt-4 shadow " id="percentusd" value="0">
+            <!-- <input type="text" placeholder=" % Percentage in INR " class="form-control mt-4 shadow " id="percentinr" disabled value="0"> -->
+            <button id="percentBtn" class="btn btn-info mt-4">% Percentage</button>
+    </div>
+    <script>
+        // API KEY = 136f075559a149ffd65f4f3fb96d2dc6
+
+        //     MAKE API Request
+        //     http://apilayer.net/api/live
+
+        // ? access_key = 136f075559a149ffd65f4f3fb96d2dc6
+        // & currencies = EUR,GBP,CAD,PLN
+        // & source = USD
+        // & format = 1
+
+
+        async function getInr() {
+            let input = document.getElementById('input').value;
+            let output = document.getElementById('output');
+            let api = await fetch(`http://apilayer.net/live?access_key=136f075559a149ffd65f4f3fb96d2dc6&currencies=INR&source=USD`)
+            let response = await api.json()
+
+            let inr = response.quotes.USDINR.toFixed(2);
+            console.log(inr)
+            let result = inr * input;
+            result = result.toFixed(2)
+            console.log(result)
+
+            output.value = ` ₹ ${result} INR`;
+            let percentBtn=document.getElementById('percentBtn');
+            getPercent(input,result)
+        //     percentBtn.addEventListener('click',() => {
+                
+                
+        //     })//
+        }
+        async function getUsd() {
+            let input = document.getElementById('input').value;
+            let output = document.getElementById('output');
+            let api = await fetch(`http://apilayer.net/live?access_key=136f075559a149ffd65f4f3fb96d2dc6&currencies=INR&source=USD`)
+            let response = await api.json()
+
+            let usd = response.quotes.USDINR.toFixed(2);
+            console.log(usd)
+            var result = input / usd;
+            result = result.toFixed(2)
+            console.log(result)
+
+            output.value = ` $ ${result} USD`;
+            getPercent(input,result)
+            
+        }
+        function getPercent(input,result){
+            let percentInp=document.getElementById('percentInp').value;
+            // let percentOut=document.getElementById('percentOut');
+            console.log(result)
+            input=(input/100)*20;
+            result=(result/100)*20;
+            result=result.toFixed(2)
+            // percentage=percentage.toFixed(2)
+            let percentusd=document.getElementById('percentusd');
+            let percentinr=document.getElementById('percentinr');
+            percentusd.value=input;
+            percentinr.value=result;
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
