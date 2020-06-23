@@ -58,7 +58,7 @@
       font-weight: 700;
     }
     h2{
-      border-bottom: 2px solid #17a2b8 !important;padding-bottom: 5px;transition: all 1s ease-in-out;
+      border-bottom: 2px solid #17a2b8 !important;padding-bottom: 5px;
     }
     .quote{width:40px;height: 40px;position: absolute;top:0;left:0;border-radius: 50%;display: flex;align-items: flex-start;justify-content: center;color:white;font-size: 2.5rem;}
     .button-container button {
@@ -67,6 +67,12 @@
       outline: none;
     }
     .randomBtn:hover{background-color: white !important;}
+    @media(max-width: 800px){
+      .review-container{width:70%;}
+    }
+    @media(max-width: 500px){
+      .review-container{width: 90%;}
+    }
   </style>
   <title>Hello, world!</title>
 </head>
@@ -169,6 +175,15 @@
       console.log(currentIteration)
 
     }
+    setInterval(() => {
+      currentIteration++;
+      if (currentIteration > reviews.length - 1) {
+        currentIteration = 0;
+
+      } 
+        getPerson(currentIteration)
+      
+    }, 5000);
     nextBtn.addEventListener('click', () => {
         currentIteration++;
       if (currentIteration > reviews.length - 1) {
