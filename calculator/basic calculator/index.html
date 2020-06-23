@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e55039;
+        }
+
+        .calciBox {
+            width: 30rem;
+        }
+
+        .output {
+            width: 30rem;
+        }
+
+        button {
+            display: block;
+        }
+
+        input,
+        select {
+            font-size: 1.1rem;
+            outline: none;
+            border: 1px solid #0099CC;
+            border-radius: 5px;
+        }
+
+        #operators {
+            font-size: 1.2rem;
+            width: 4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box shadow p-5 rounded">
+    <div class="calciBox ">
+        <div class="output">
+            <input type="text" placeholder=" 0" class="form-control shadow text-right" disabled id="output">
+        </div>
+        <div class="inputs mt-4">
+            <input type="number" placeholder=" Num 1" id="num1" class="text-center ">
+            <select name="" id="operators" class="text-center">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">x</option>
+                <option value="/">÷</option>
+            </select>
+            <input type="number" placeholder=" Num 2" id="num2" class="text-center">
+            <button class="btn btn-info btn-lg btn-block mt-4 shadow" id="calculate">Calculate</button>
+        </div>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script>
+
+        let Calculate = document.getElementById('calculate');
+        Calculate.addEventListener('click', () => {
+            showResult()
+        });
+        function showResult() {
+            let num1 = document.getElementById('num1');
+            let num2 = document.getElementById('num2');
+            let operators = document.getElementById('operators');
+            let output = document.getElementById('output');
+
+            num1 = Number(num1.value);
+            num2 = Number(num2.value);
+
+            switch (operators.value) {
+                case '+':
+                    output.value = num1 + num2;
+                    break
+                case '-':
+                    output.value = num1 - num2;
+                    break
+                case '*':
+                    output.value = num1 * num2;
+                    break
+                case '/':
+                    output.value = num1 / num2;
+                    break
+
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

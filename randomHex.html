@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <style>
+        .background{display: flex;justify-content: center;align-items: center;height: 86.5vh;}
+        button{border:2px solid !important;border-radius: 15px !important;margin:0 auto;display: block !important;font-size: 1.2rem !important;}
+        .display{position: absolute;z-index: 1000;}
+        h1{border-radius: 25px;padding: 1rem;}
+    </style>
+  </head>
+  <body>
+    <nav class="shadow text-center py-3">
+        <h2 class="h2">HEX COLOR GENERATOR</h2>
+    </nav>
+    <div class="background">
+    <div class="display">
+        <h1 class="bg-dark text-white h1 shadow">Color Code : <span id="hexValue">#FFFFFF</span></h1>
+        <button class="btn text-center">Click Me</button>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script>
+        let hex=[0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
+        let color='#';
+        let btn=document.querySelector('.btn');
+        let hexValue=document.getElementById('hexValue');
+        btn.addEventListener('click',()=>{
+            for(i=0;i<6;i++){
+                color+=hex[getRandomNumber()]
+                hexValue.textContent=color;
+            }
+            console.log(color)
+            document.querySelector('.background').style.backgroundColor=color;
+            document.querySelector('.h2').style.color=color;
+            document.querySelector('.btn').style.backgroundColor="white";
+            document.querySelector('.btn').style.color=color;
+            color='#'
+        })
+        function getRandomNumber(){
+            return Math.floor(Math.random()*hex.length)
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: #7b4397;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #dc2430, #7b4397);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #dc2430, #7b4397); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      color: aliceblue;
+    }
+    .container{min-height: 80vh;display: flex;flex-direction: column;justify-content: space-around;max-width: 60%;}
+    .area{position: relative;}
+    .area button {position: absolute;top:0;right:0;}
+    .temp-box{padding: 2.6rem 0;border-radius: 50%;display: inline-block;width:40%;margin: 0 auto;}
+    canvas{margin:0 auto;display: block;}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="area">
+      <input type="text" placeholder=" Enter your city name " class="form-control shadow p1" id="cityname">
+      <button class="btn btn-warning " id="getWeather">Show Weather</button>
+    </div>
+    <div class="temp ">
+      <div class="actualTemp"></div>
+      <div class="feelsLike"></div>
+  <canvas id="icon1" width="128" height="128"></canvas>
+
+      <div class="description"></div>
+    </div>
+    
+  </div>
+  <script>
+    
+      var city = document.getElementById('cityname');
+      
+        city.addEventListener('keyup',event => {
+      if (event.keyCode===13 ){
+        getWeatherReport()
+      }}) 
+
+      let getWeather=document.getElementById('getWeather');
+      getWeather.addEventListener('click',()=> getWeatherReport())
+    
+    
+      function getWeatherReport(){
+        console.log('enter pressed')
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=metric&appid=e7d61398e3b4124ab4f7bd68bffaf97c`).then(res => res.json()).then(data => {
+        console.log(data);
+        let temp=document.querySelector('.temp').classList.add('temp-box');
+        document.querySelector('.actualTemp').innerHTML = `<h1 class="text-center">${data.main.temp} °C</h1>`;
+        document.querySelector('.feelsLike').innerHTML = `<h6 class="text-center mb-5">${data.main.feels_like} °C [feels like]</h6>`
+        document.querySelector('.description').innerHTML = `<h4 class="text-center">${data.weather[0].description}</h4>`;
+        console.log(data)
+        var skycons = new Skycons({"color": "white"});
+        skycons.set("icon1", Skycons.PARTLY_CLOUDY_DAY);
+
+        skycons.play();
+
+      })
+      }
+
+  </script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+    <script src="skycons.js"></script>
+</body>
+
+</html>

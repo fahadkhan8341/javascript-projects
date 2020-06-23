@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0f0c29;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .calculator {
+            background-color: #575757;
+        }
+
+        button {
+            font-size: 2rem !important;
+            background-color: #EBEBEB !important;
+            border: none;
+            color: white;
+            margin: .5rem 1rem;
+            width: 70px;
+            height: 70px;
+            ;
+        }
+
+        button:hover {
+            background-color: #8f8e8e !important;
+            color: white !important
+        }
+
+        .output {
+            margin: 1rem;
+        }
+
+        input {
+            width: 100%;
+            font-size: 2rem;
+            text-align: right;
+            padding: 1rem .4rem;
+            background-color: #CDDECD;
+        }
+
+        .equals {
+            height: 155px !important;
+            position: absolute;
+            margin-left: 20px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator rounded shadow p-2">
+        <div class="output rounded shadow">
+            <input type="text" placeholder=" 0" disabled class="shadow rounded" id="outputValue">
+        </div>
+        <div class="buttons">
+            <div class="row1">
+                <button class="btn btn-lg shadow" data-num="7">7</button>
+                <button class="btn btn-lg shadow" data-num="8">8</button>
+                <button class="btn btn-lg shadow" data-num="9">9</button>
+                <button class="btn btn-lg shadow" data-num="/">/</button>
+            </div>
+            <div class="row2">
+                <button class="btn btn-lg shadow" data-num="4">4</button>
+                <button class="btn btn-lg shadow" data-num="5">5</button>
+                <button class="btn btn-lg shadow" data-num="6">6</button>
+                <button class="btn btn-lg shadow" data-num="*">*</button>
+            </div>
+            <div class="row3">
+                <button class="btn btn-lg shadow" data-num="1">1</button>
+                <button class="btn btn-lg shadow" data-num="2">2</button>
+                <button class="btn btn-lg shadow" data-num="3">3</button>
+                <button class="btn btn-lg shadow" data-num="+">+</button>
+            </div>
+            <div class="row4">
+                <button class="btn btn-lg shadow" data-num="0">0</button>
+                <button class="btn btn-lg shadow" data-num=".">.</button>
+                <button class="btn btn-lg shadow" data-num="-">-</button>
+                <button class="btn shadow bg-warning equals mr-2">=</button>
+            </div>
+            <div class="row5">
+                <button class="btn btn-lg shadow" data-num="%">%</button>
+                <button class="btn shadow del" data-num="DEL"><small>DEL</small></button>
+                <button class="btn shadow clear bg-danger text-white" data-num="C">C</button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script>
+        let btns = document.querySelectorAll('.btn-lg')
+        let equals = document.querySelector('.equals');
+        let outputValue = document.querySelector('#outputValue');
+        let clear = document.querySelector('.clear');
+        let del = document.querySelector('.del');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                outputValue.value += btn.textContent;
+            })
+        })
+        equals.addEventListener('click', () => {
+            if (outputValue.value != 0) {
+                outputValue.value = eval(outputValue.value)
+            }
+        })
+        clear.addEventListener('click', () => outputValue.value = '')
+        del.addEventListener('click', () => {
+            console.log(outputValue.value.lenght)
+            outputValue.value = outputValue.value.slice(0, -1)
+        })
+    </script>
+</body>
+
+</html>
