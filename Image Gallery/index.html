@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            ;
+        }
+
+        .img-container {
+            overflow: hidden;
+            object-fit: cover;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 300px);
+            grid-gap: .5rem;
+            align-self: stretch;
+            margin: auto;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            transition: all 1s ease;
+            object-fit: cover;
+        }
+
+        .img-animate {
+            transform: rotate(360deg)
+        }
+
+        .img-container img:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-container {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, .8);
+            opacity: 0;
+            z-index: -22;
+            transition: all .2s ease;
+        }
+
+        .modal {
+            overflow: hidden;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            transition: all 1s ease;
+            transform: scale(0);
+        }
+
+        .modal-animate {
+            transform: scale(1);
+        }
+
+        .modal .modalImg {
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 70%;
+            transform: translate(-50%, -50%);
+            transition: all 1s ease;
+        }
+
+        .modal-show {
+            opacity: 1;
+            z-index: 22;
+            transform: scale(1);
+        }
+
+        .img-info {
+            position: absolute;
+            text-align: center;
+            bottom: 1rem;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto;
+            font-family: Arial, Helvetica, sans-serif;
+            display: block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .control {
+            width: 70px;
+            height: 70px;
+            transition: all .4s ease;
+            cursor: pointer;
+        }
+
+        .control:hover {
+            transform: rotate(360deg);
+        }
+
+        .closeBtn {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem
+        }
+
+        .leftBtn {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%
+        }
+
+        .rightBtn {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gallery">
+        <div class="img-container">
+            <img src="body-of-water-aerial-photography-392586.jpg" alt="body of water aerial photography" class="img">
+        </div>
+        <div class="img-container">
+            <img src="clouds-dawn-nature-ocean-561463.jpg" alt="clouds dawn nature ocean" class="img">
+        </div>
+        <div class="img-container">
+            <img src="scenic-view-of-mountain-1666021.jpg" alt="scenic view of mountain" class="img">
+        </div>
+        <div class="img-container">
+            <img src="tilt-shift-lens-photo-of-blue-flowers-673857.jpg" alt="tilt shift lens photo of blue flowers"
+                class="img">
+        </div>
+        <div class="img-container">
+            <img src="body-of-water-near-green-mountain-931018.jpg" alt="body of water near green mountain" class="img">
+        </div>
+        <div class="img-container">
+            <img src="aerial-view-of-road-in-the-middle-of-trees-1173777.jpg"
+                alt="aerial view of road in the middle of trees" class="img">
+        </div>
+        <div class="img-container">
+            <img src="nature-summer-purple-yellow-36753.jpg" alt="nature summer purple yellow" class="img">
+        </div>
+        <div class="img-container">
+            <img src="ocean-wave-1656579.jpg" alt="ocean wave" class="img">
+        </div>
+        <div class="img-container">
+            <img src="photography-of-fall-trees-1591447.jpg" alt="photography of fall trees" class="img">
+        </div>
+        <div class="img-container">
+            <img src="river-between-green-leafed-tree-1766838.jpg" alt="river between green leafed tree" class="img">
+        </div>
+        <div class="img-container">
+            <img src="road-nature-trees-branches-38537.jpg" alt="road nature trees branches" class="img">
+        </div>
+        <div class="img-container">
+            <img src="calm-body-of-water-1363876.jpg" alt="calm body of water" class="img">
+        </div>
+        <div class="img-container">
+            <img src="view-of-elephant-in-water-247431.jpg" alt="view of elephant in water" class="img">
+        </div>
+    </div>
+    <div class="modal-container">
+        <div class="modal">
+            <img src="x.svg" class="closeBtn control" alt="">
+            <img src="clouds-dawn-nature-ocean-561463.jpg" alt="" class="modalImg">
+            <p class="img-info"></p>
+            <img src="chevron-left.svg" class="leftBtn control" alt="">
+            <img src="chevron-right.svg" class="rightBtn control" alt="">
+        </div>
+    </div>
+
+    <script>
+        let images = document.querySelectorAll('.img');
+        let modalContainer = document.querySelector('.modal-container');
+        let modal = document.querySelector('.modal')
+        let modalImg = document.querySelector('.modalImg');
+        let modalText = document.querySelector('.img-info')
+        let closeBtn = document.querySelector('.closeBtn')
+        let leftBtn = document.querySelector('.leftBtn')
+        let rightBtn = document.querySelector('.rightBtn')
+        images.forEach((img) => {
+            img.addEventListener('click', (e) => {
+                let imgSrc = e.currentTarget.getAttribute('src');
+                let imgAlt = e.currentTarget.alt;
+                console.log(imgSrc)
+                modalContainer.classList.add('modal-show');
+                modal.classList.add('modal-animate')
+                modalImg.src = imgSrc;
+                modalText.textContent = imgAlt;
+
+               
+
+                window.getNextImg = function () {
+                    var nextImg = e.target.parentElement.nextElementSibling.children[0].getAttribute('src');
+                    let nextAlt = e.target.parentElement.nextElementSibling.children[0].alt
+                    console.log(nextImg)
+                    modalImg.src = nextImg
+                    modalText.textContent = nextAlt;
+                };
+                window.getPrevImg = function () {
+                    var prevImg = e.target.parentElement.previousElementSibling.children[0].getAttribute('src');
+                console.log(prevImg)
+                    let prevAlt = e.target.parentElement.nextElementSibling.children[0].alt
+                    console.log(prevImg)
+                    modalImg.src = prevImg
+                    modalText.textContent = prevAlt;
+                };
+
+            })
+        })
+        rightBtn.addEventListener('click', () => {
+            getNextImg()
+        });
+        leftBtn.addEventListener('click', () => {
+            getPrevImg()
+        })
+        modal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                modalContainer.classList.remove('modal-show')
+                modal.classList.remove('modal-animate')
+            }
+
+        })
+        closeBtn.addEventListener('click', () => {
+            modalContainer.classList.remove('modal-show')
+        })
+
+
+    </script>
+</body>
+
+</html>

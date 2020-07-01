@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;box-sizing: border-box;}
+        header{overflow: hidden;max-height: 100vh;}
+        .video-container{width: 100%;max-height:100vh;object-fit: cover;overflow-y: hidden;position: absolute;z-index: -22;}
+        h1{position: absolute;top:35%;left:30%;color: white;font-size: 6rem;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+        header::after{
+            content: '';
+            width:100%;
+            height: 100vh;
+            position: absolute;
+            top:0;
+            left:0;
+            background-color:rgba(0, 0, 0, .7);
+            z-index: -10;
+        }
+        .btn-switch{position: absolute;left:2rem;bottom: 2rem;font-size: 1.5rem;background-color: white;border: none;outline: none;padding: .7rem;transition: all 1s ease;border-radius: 25px;}
+        .btn-switch span{width:50%;color:#0099CC}
+        .switch{position: absolute;top:0;left:0;width: 50%;height: 100%;background-color:#0099CC;border-radius: 25px;transition: all .3s ease;}
+        .slide .switch{left:50%;}
+        .preloader{position: fixed;width:100%;height: 100vh;z-index:99;display: flex;justify-content: center;align-items: center;visibility: visible;background-color: white;}
+        .preloader-hide{visibility: hidden;z-index: -999;}
+        .preloader-gif{color:white;}
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <img src="preloader.gif" alt="" class="preloader-gif">
+    </div>
+    <header>
+        <video class="video-container" autoplay loop muted>
+            <source src="video.mp4" type="video/mp4"></source>
+        </video>
+        <h1>Fahd Portfolio</h1>
+        <button class="btn-switch">
+            <span>play</span>
+            <span style="margin-left: 1.2rem;">pause</span>
+            <span class="switch"></span>
+        </button>
+    </header>
+    <script>
+        let btn=document.querySelector('.btn-switch')
+        let video=document.querySelector('.video-container')
+        btn.addEventListener('click',()=>{
+            if(!btn.classList.contains('slide')){
+            video.pause()
+            btn.classList.add('slide')
+            } else {
+            video.play()
+            btn.classList.remove('slide')
+            }
+            })
+            let preloader=document.querySelector('.preloader');
+            window.addEventListener('load',()=>{
+                setTimeout(() => {
+                    
+                preloader.classList.add('preloader-hide')
+                }, 4000);
+            })
+            window.addEventListener('keyup',(e)=>{
+                if(e.keyCode==32){
+                    if(video.play()){
+                        video.pause()
+                    } else{
+                        video.play()
+                    }
+                    
+                }
+            })
+    </script>
+</body>
+</html>

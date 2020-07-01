@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;box-sizing: border-box;}
+        .container{width:100%;height: 100vh;background-color: lightcoral;max-height: 100vh;display: flex;overflow: hidden;position:relative;}
+        img{height: 100%;width: 100%;object-fit: cover;position: absolute;transition: all 1s ease;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="IMG/aerial-view-of-road-in-the-middle-of-trees-1173777.jpg" alt="">
+        <img src="IMG/body-of-water-aerial-photography-392586.jpg" alt="">
+        <img src="IMG/body-of-water-near-green-mountain-931018.jpg" alt="">
+        <img src="IMG/calm-body-of-water-1363876.jpg" alt="">
+        <img src="IMG/clouds-dawn-nature-ocean-561463.jpg" alt="">
+        <img src="IMG/nature-summer-purple-yellow-36753.jpg" alt="">
+        <img src="IMG/ocean-wave-1656579.jpg" alt="">
+        <img src="IMG/photography-of-fall-trees-1591447.jpg" alt="">
+        <img src="IMG/river-between-green-leafed-tree-1766838.jpg" alt="">
+        <img src="IMG/road-nature-trees-branches-38537.jpg" alt="">
+        <img src="IMG/scenic-view-of-mountain-1666021.jpg" alt="">
+        <img src="IMG/tilt-shift-lens-photo-of-blue-flowers-673857.jpg" alt="">
+        <img src="IMG/view-of-elephant-in-water-247431.jpg" alt="">
+        
+    </div>
+    <script>
+        let images=document.querySelectorAll('img');
+        images.forEach((img,index)=>{
+            img.style.left=`${index * 100}%`
+        })
+        let counter=0;
+        window.addEventListener('keyup',(e)=>{
+            if(e.keyCode===39){
+                console.log(e.keyCode)
+                counter++
+                carousel();
+            }
+        })
+        window.addEventListener('keyup',(e)=>{
+            if(e.keyCode===37){
+                counter--;
+                carousel()
+            }
+        })
+        function carousel(){
+            if(counter===images.length){
+                counter=0
+            } 
+            if(counter<0){
+                counter=images.length-1;
+            }
+            images.forEach(img=>{
+                img.style.transform=`translateX(-${counter*100}%)`
+            })
+        }
+        setInterval(() => {
+            counter++
+            carousel()
+        }, 3000);
+    </script>
+</body>
+</html>
