@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;font-family:sans-serif;}
+        .pads{background-color: lightblue;position: fixed;bottom: 0;width: 100%;height: 25vh;display: flex;}
+        .pads div{height: 25vh;flex:1;transition: all .4s ease;}
+        .pads div:active{margin-top:-1rem}
+        
+        .balls{display: flex;position: absolute;width:100%;height:80vh;z-index: -22;}
+        .ball{position: absolute;left:50px;width:50px;height: 50px;background-color: red;border-radius: 50%;bottom: 0;}
+        @keyframes animate{
+            0%{bottom:0px}
+            50%{bottom:350px}
+            100%{bottom:0px}
+        }
+        header{margin: 1.3rem;}
+        .jump{animation:animate both 1.5s ease-in}
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Music App</h1>
+            <p>Pracice your music skilss</p>
+        </header>
+        <div class="pads">
+            <div class="pad1">
+                <audio src="sounds/bubbles.mp3" class="mp3"></audio>
+            </div>
+            <div class="pad2">
+                <audio src="sounds/clay.mp3" class="mp3"></audio>
+            </div>
+            <div class="pad3">
+                <audio src="sounds/confetti.mp3" class="mp3"></audio>
+            </div>
+            <div class="pad4">
+                <audio src="sounds/glimmer.mp3" class="mp3"></audio>
+            </div>
+            <div class="pad5">
+                <audio src="sounds/kick-electro01.wav" class="mp3"></audio>
+            </div>
+            <div class="pad6">
+                <audio src="sounds/moon.mp3" class="mp3"></audio>
+            </div>
+            <div class="pad7">
+                <audio src="sounds/snare-lofi02.wav" class="mp3"></audio>
+            </div>
+            <div class="pad8">
+                <audio src="sounds/ufo.mp3" class="mp3"></audio>
+            </div>
+        </div>
+        <div class="balls">
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+        </div>
+    </div>
+    <script>
+        let colors=[ "lightcoral", "lightseagreen", "mediumslateblue","mediumvioletred","olivedrab","orange","royalblue","seagreen"]
+        let balls=document.querySelectorAll('.ball')
+        let padContainer=document.querySelector('.pads')
+        balls.forEach((ball,index)=>{
+            
+            ball.style.left=`${index*135}px`;
+            
+        })
+        let pads=document.querySelectorAll('.pads div')
+        let audios=document.querySelectorAll('.mp3')
+        pads.forEach((pad,index)=>{
+            pad.style.backgroundColor=colors[index]
+            pad.addEventListener('click',()=>{
+                audios[index].currentTime=0;
+                audios[index].play();
+                balls.forEach(ball=>{
+                ball.style.backgroundColor=colors[index]
+                })
+            })
+            
+        })
+         padContainer.addEventListener('click',()=>{
+             balls.forEach((ball)=>{
+                ball.classList.remove('jump')
+                void ball.offsetWidth;
+                ball.style.backgroundColor=
+                ball.classList.add('jump')
+                 
+             })
+         })       
+    </script>
+</body>
+</html>

@@ -13,7 +13,7 @@
         .inputField{width: 60%;position: relative;}
         button{position: absolute;top:0;right: 0;}
         .result{opacity: 0;transform: translateY(30px);transition: all 1s ease;}
-        .result-show{opacity: 1;transform: translateY(0px);}
+        .show-result{opacity: 1;transform: translateY(0px);}
     </style>
   </head>
   <body>
@@ -40,6 +40,7 @@
         let btn=document.querySelector('button')
         let result=document.querySelector('.result')
         btn.addEventListener('click',()=>{
+            result.classList.remove('show-result')
         let input=document.querySelector('input')
         let inputValue=input.value
             console.log(inputValue);

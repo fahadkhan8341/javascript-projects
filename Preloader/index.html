@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .preload {
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            top: 0;
+            background-color: #87ceeb;
+            z-index: 99;
+            pointer-events: all;
+            opacity: 1;
+            transition: all 1.2s ease;
+        }
+
+        .loaded {
+            z-index: -99;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .plane-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(-1, 1);
+        }
+
+        .plane {
+            height: 100px;
+            animation: plane 1s infinite ease alternate;
+        }
+
+        h3 {
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            position: absolute;
+            right: 2rem;
+            bottom: 2rem;
+        }
+
+        .cloud1,
+        .cloud2,
+        .cloud3 {
+            height: 100px;
+            position: absolute;
+            right: 0;
+            z-index: -1;
+        }
+
+        .cloud1 {
+            top: 25%;
+            transform: translate(100%, -25%);
+            animation: clouds 3s infinite ease-in-out 1s;
+        }
+
+        .cloud2 {
+            top: 50%;
+            transform: translate(100%, -50%);
+            animation: clouds 3s infinite ease-in-out 3s;
+        }
+
+        .cloud3 {
+            top: 75%;
+            transform: translate(100%, -75%);
+            animation: clouds 3s infinite ease-in-out 2s;
+        }
+
+        .pause {
+            animation-play-state: paused;
+        }
+
+        @keyframes plane {
+            from {
+                transform: translateY(0px);
+            }
+
+            to {
+                transform: translateY(30px);
+            }
+        }
+
+        @keyframes clouds {
+            from {
+                right: 0%;
+            }
+
+            to {
+                right: 130%;
+            }
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preload">
+
+        <div class="plane-container">
+            <img src="plane.png" alt="" class="plane">
+            <!-- <img src="plane.png" alt="" class="plane2"> -->
+        </div>
+        <h3>Loading Please wait...</h3>
+        <img src="clouds.png" alt="" class="clouds cloud1">
+        <img src="clouds.png" alt="" class="clouds cloud2">
+        <img src="clouds.png" alt="" class="clouds cloud3">
+    </div>
+    <div class="main">
+        <h1>WebPage loaded successfully</h1>
+        <img src="https://source.unsplash.com/user/erondu/300x300" alt="">
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            let preloader = document.querySelector('.preload')
+            preloader.classList.add('loaded');
+            let plane = document.querySelector('.plane')
+            let cloud1 = document.querySelector('.cloud1')
+            let cloud2 = document.querySelector('.cloud2')
+            let cloud3 = document.querySelector('.cloud3')
+            plane.classList.add('pause');
+            cloud1.classList.add('pause')
+            cloud2.classList.add('pause')
+            cloud3.classList.add('pause')
+        })
+
+
+    </script>
+</body>
+
+</html>

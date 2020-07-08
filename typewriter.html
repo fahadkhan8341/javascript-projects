@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;font-family: cursive;}
+        body{height: 100vh;display: flex;align-items: center;justify-content: center;background:url('https://image.ibb.co/n5A2HU/showcase.jpg')center/cover no-repeat;color:#ccc}
+        .container{display: flex;width: 100%;text-align: center;}
+        h1{letter-spacing: 3px;}
+        h1:nth-child(1){margin-right: 1rem;text-align: center;margin-left: 30%;}
+        .result{transition:all .5s ease;}
+        .result::after{
+            content: '';
+            background-color: white;
+            width: 2px;
+            height: 7px;
+            border-right: 2px solid #aaa;
+            animation: blinker .8s infinite ease;
+        }
+        @keyframes blinker {
+            0%{opacity: 0;}
+            100%{opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>sk Abdullah the  </h1><h1 class="result"></h1>
+    </div>
+    <script>
+        let texts=['Web Developer','Freelancer','Gamer','Driver']
+        let count=0;
+        let index=0;
+        let currentText=''
+        let letter=''
+        function type(){
+            if(count === texts.length){
+                count=0
+            }
+            currentText=texts[count]
+            letter=currentText.slice(0,index++)
+            document.querySelector('.result').textContent=letter
+            if(letter.length===currentText.length){
+                count++;
+                index=0;
+            }
+            setTimeout(type,600)
+        }
+        type()
+    </script>
+</body>
+</html>

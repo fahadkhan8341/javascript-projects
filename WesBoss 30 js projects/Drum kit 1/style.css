@@ -1,0 +1,6 @@
+*{margin: 0;padding: 0;box-sizing: border-box;font-family: cursive;}
+        body{height: 100vh;display: flex;align-items: center;justify-content: center;background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('https://image.ibb.co/n5A2HU/showcase.jpg')center/cover no-repeat;color:#ccc}
+        .container{display: flex;width: 85%;text-align: center;margin:auto ;justify-content:space-between;flex-wrap: wrap;}
+        .box{padding:.5rem 1rem;border:3px solid black;background-color: rgba(0, 0,0, .4);width: 100px;height: 80px;transition: all .07s ease-in-out;display: flex;justify-content:space-evenly;flex-direction: column;align-items: center;margin:.6rem 0}
+        .box p{color:#E6C61E;text-transform: uppercase;}
+        .play{transform: scale(1.1);border-color: #E6C61E;box-shadow: 0 0 10px #E6C61E;}
