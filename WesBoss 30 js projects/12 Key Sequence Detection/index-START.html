@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+  let secretCode=/fahad/gi
+  let pressed=[]
+  window.addEventListener('keyup',e=>{
+      pressed.push(e.key)    
+      // console.log(pressed);
+      pressed.splice(-secretCode.length-1,pressed.length-secretCode.length)
+      
+      if(secretCode.exec(pressed.join(''))){
+        // alert('Cheat Code Activated')
+        cornify_add()
+      }
+  })
+</script>
+</body>
+</html>
