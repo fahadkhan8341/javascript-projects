@@ -115,9 +115,12 @@ p {
 }
 .article{transition: all 1s ease;transform: translate(100%);}
 .menu-item{transition: all 1s ease;}
-.photo:hover{border:none};
+.photo{transition: all 0.4s ease-in;transform: scale(1);}
+.img-box{overflow: hidden;}
+.photo:hover{transform: scale(1.1)};
 article{padding-top: 1rem !important;}
 article:hover{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+.menu-item {padding: 1rem;border-radius: 25px;cursor: pointer;}
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 4rem;

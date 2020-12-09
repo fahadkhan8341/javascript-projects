@@ -146,7 +146,7 @@ p {
   display: inline-block;
   transition: var(--transition);
   font-size: 0.875rem;
-  border: 2px solid var(--clr-black);
+  /* border: 2px solid var(--clr-black); */
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: var(--radius);
@@ -228,7 +228,8 @@ About
 }
 .tab-btn {
   padding: 1rem 0;
-  border: none;
+  border: none !important;
+  outline:none;
   text-transform: capitalize;
   font-size: 1rem;
   display: block;

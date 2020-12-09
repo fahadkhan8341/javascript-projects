@@ -80,7 +80,9 @@ window.addEventListener('DOMContentLoaded',()=>{
 function displayItems(menuItems){
   let displayMenu= menuItems.map(item=>{
     return `<article class="menu-item">
+    <div class="img-box">
     <img src="${item.img}" class="photo" alt="">
+    </div>
     <div class="item-info">
     <header>
       <h4>${item.title}</h4>

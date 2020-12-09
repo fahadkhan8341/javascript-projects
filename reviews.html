@@ -99,7 +99,9 @@
     </div>
 
   </div>
-
+  <div class="watermark" style="position: absolute;bottom:1rem;right:1rem;color:hsl(209, 61%, 16%);border:3px solid  hsl(210, 31%, 80%);;border-radius: 5px;padding:0;">
+    <h4 style="padding:1rem 1rem 0.5rem 1rem">-Build by Sk Abdullah</h4>
+  </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -175,7 +177,7 @@
       console.log(currentIteration)
 
     }
-    setInterval(() => {
+    let loop = setInterval(() => {
       currentIteration++;
       if (currentIteration > reviews.length - 1) {
         currentIteration = 0;
@@ -190,7 +192,9 @@
         currentIteration = 0;
 
       } 
-        getPerson(currentIteration)
+        getPerson(currentIteration);
+        clearInterval(loop)
+        
       
     })
     prevBtn.addEventListener('click', () => {
